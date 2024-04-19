@@ -63,7 +63,9 @@ const Project = () => {
 
   return (
     <>
-      {loading ? <h1>Loading ...</h1> : data.length > 0 ? (
+      {loading ? (
+        <h1>Loading ...</h1>
+      ) : data.length > 0 ? (
         <div className="row">
           {data.map((ele, index) => (
             <div key={index} className="col-12 col-lg-4 mb-4">
@@ -105,7 +107,22 @@ const Project = () => {
                             </a>
                           </li>
                         </ul>
-                        <h2 className="entry-title h4 mb-0">
+                        <span
+                          style={{
+                            fontFamily: "monospace",
+                            fontWeight: "bolder",
+                          }}
+                        >
+                          Tech Used{" "}
+                        </span>
+                        <span className="btn btn-warning">{ele.tech}</span>
+                        <h2
+                          className="entry-title h4 mb-0"
+                          style={{
+                            fontFamily: "monospace",
+                            fontWeight: "bolder",
+                          }}
+                        >
                           <a
                             className="link-dark text-decoration-none"
                             href="#!"
@@ -132,7 +149,15 @@ const Project = () => {
                                 <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                               </svg>
-                              <span className="ms-2 fs-7">{ele.deadline}</span>
+                              <span
+                                className="ms-2 fs-7"
+                                style={{
+                                  fontFamily: "monospace",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {ele.deadline}
+                              </span>
                             </a>
                           </li>
                           <li>

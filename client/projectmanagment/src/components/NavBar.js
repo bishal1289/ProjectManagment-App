@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { email } = useEmail();
-  console.log("object", email)
+  const user = JSON.parse(localStorage.getItem('email'));
   
   function handleLogout() {
     localStorage.removeItem("email");
@@ -112,9 +111,9 @@ const NavBar = () => {
                   </a>
                   <ul className="dropdown-menu dropdown-menu-md-end bsb-dropdown-animation bsb-fadeIn">
                     <li>
-                      {email && (
+                      {user && (
                         <h6 className="dropdown-header fs-7 text-center">
-                          Welcome, {email.name}
+                          Welcome, {user.name}
                         </h6>
                       )}
                     </li>
@@ -138,9 +137,9 @@ const NavBar = () => {
                               <div className="text-secondary mt-1 fs-7">
                                 Premium Account
                               </div>
-                              {email && (
+                              {user && (
                                 <div className="text-secondary mt-1 fs-7">
-                                  {email.email}
+                                  {user.email}
                                 </div>
                               )}
                             </div>

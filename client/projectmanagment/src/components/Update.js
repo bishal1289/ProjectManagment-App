@@ -5,35 +5,36 @@ import { useNavigate } from "react-router-dom";
 const Update = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
-    const [projectInfo, setProjectInfo] = useState({
-      name: "",
-      description: "",
-      deadline: "",
-      email: "bishalmandal235@gmail.com",
-      technology: "",
-    });
+
     useEffect(() => {
         const d = JSON.parse(localStorage.getItem('project'))
         setData(d);
     },[])
     
-    function handleInputChange(e) {
-        const { name, value } = e.target;
-        setProjectInfo((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-    }
+  function handleNameChange(e) {
+    setData({ ...data, name: e.target.value });
+  }
+  function handleTechChange(e) {
+    setData({ ...data, tech: e.target.value });
+  }
+  function handleDescriptionChange(e) {
+    setData({ ...data, description: e.target.value });
+  }
+  function handleDeadlineChange(e) {
+    setData({ ...data, deadline: e.target.value });
+  }
+  console.log("Update", data);
     async function handleSubmit(e) {
         e.preventDefault();
         let obj = {};
         obj._id = data._id;
         obj.createdBy = data.createdBy._id;
         obj.email = data.email;
-        obj.name = projectInfo.name;
-        obj.description = projectInfo.description;
-        obj.deadline = projectInfo.deadline;
-        obj.technology = projectInfo.technology;
+        obj.name = data.name;
+        obj.description = data.description;
+        obj.deadline = data.deadline;
+        obj.technology = data.technology;
+      
         try {
         await axios
           .post("http://localhost:4000/update", obj, {
@@ -70,8 +71,8 @@ const Update = () => {
                               name="name"
                               id="fName"
                               placeholder="First Name"
-                              onChange={handleInputChange}
-                              value={projectInfo.name}
+                              onChange={handleNameChange}
+                              value={data.name}
                               required
                             ></input>
                             <label for="firstName" class="form-label">
@@ -87,8 +88,8 @@ const Update = () => {
                               name="technology"
                               id="email"
                               placeholder="name@example.com"
-                              onChange={handleInputChange}
-                              value={projectInfo.tech}
+                              onChange={handleTechChange}
+                              value={data.tech}
                               required
                             ></input>
                             <label for="email" class="form-label">
@@ -104,8 +105,8 @@ const Update = () => {
                               name="description"
                               id="password"
                               placeholder="Description"
-                              onChange={handleInputChange}
-                              value={projectInfo.description}
+                              onChange={handleDescriptionChange}
+                              value={data.description}
                               required
                             ></input>
                             <label for="password" class="form-label">
@@ -121,8 +122,8 @@ const Update = () => {
                               name="deadline"
                               id="email"
                               placeholder="Deadline of Project"
-                              onChange={handleInputChange}
-                              value={projectInfo.deadline}
+                              onChange={handleDeadlineChange}
+                              value={data.deadline}
                               required
                             ></input>
                             <label for="email" class="form-label">
