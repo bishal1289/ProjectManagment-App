@@ -4,7 +4,13 @@ const app = express();
 const cors = require('cors');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {
+        origin:["https://deploy-mern-1whq.vercel.app"],
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 
 const userRoutes = require("./routes/userRoute");
 const {connect} = require("./db/db");
