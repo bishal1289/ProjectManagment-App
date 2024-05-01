@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom"
 import axios from 'axios';
 
+
 const Register = () => {
   const [valid, setValid] = useState(false);
   const navigate = useNavigate();
@@ -26,11 +27,11 @@ const Register = () => {
     obj.password = data.password;
 
     try {
-      const response = await axios.post("http://localhost:4000/register", obj, {
+      const response = await axios.post(`${process.env.REACT_APP_URL}/register`, obj, {
         headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response.data);
       if (response.data.message === "User Exist") {
         setValid(true);

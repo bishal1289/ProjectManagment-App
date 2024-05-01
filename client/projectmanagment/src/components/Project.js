@@ -22,17 +22,17 @@ const Project = () => {
       console.log("ii", obj);
       try {
          await axios
-          .post("http://localhost:4000/project", obj, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then((res) => {
-            console.log(res.data);
-            const data = res.data;
-            setData(data);
-            setLoading(false);
-          });
+           .post(`${process.env.REACT_APP_URL}/project`, obj, {
+             headers: {
+               "Content-Type": "application/json",
+             },
+           })
+           .then((res) => {
+             console.log(res.data);
+             const data = res.data;
+             setData(data);
+             setLoading(false);
+           });
       } catch (error) {
         console.log(error);
       }
@@ -43,7 +43,7 @@ const Project = () => {
   async function handleDelete(ele) {
     try {
       await axios
-        .post("http://localhost:4000/delete", ele, {
+        .post(`${process.env.REACT_APP_URL}/delete`, ele, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -64,7 +64,11 @@ const Project = () => {
   return (
     <>
       {loading ? (
-        <h1>Loading ...</h1>
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+          </div>
+          <span className="sr-only">Loading...</span>
+        </div>
       ) : data.length > 0 ? (
         <div className="row">
           {data.map((ele, index) => (

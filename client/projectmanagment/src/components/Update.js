@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const Update = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
@@ -37,14 +38,14 @@ const Update = () => {
       
         try {
         await axios
-          .post("http://localhost:4000/update", obj, {
+          .post(`${process.env.REACT_APP_URL}/update`, obj, {
             headers: {
               "Content-Type": "application/json",
             },
           })
           .then((res) => {
             console.log("update", res.data);
-              navigate("/project");
+            navigate("/project");
           });
       } catch (error) {
         console.log(error);

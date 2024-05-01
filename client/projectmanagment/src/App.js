@@ -8,16 +8,17 @@ import Addproject from "./components/Addproject";
 import Update from "./components/Update";
 
 function App() {
+
   return (
     <>
       <BrowserRouter>
         <NavBar/>
         <Routes>
           <Route exact path="/" element={<Login/>}></Route>
-          <Route exact path="/register" element={<Register/>}></Route>
-          <Route exact path="/project" element={<Project/>}></Route>
+          <Route exact path="/register" element={<Register/>}></Route> 
+          <Route exact path="/project" element={<Project/>}></Route> 
           <Route exact path="/add-project" element={<Addproject/>}></Route>
-          <Route exact path="/update" element={<Update/>}></Route>
+          <Route exact path="/update" element={<Update/>}></Route> 
         </Routes>
       </BrowserRouter>
     </>

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEmail } from "../context/AuthContext";
 
+
+
 const Addproject = () => {
   const navigate = useNavigate();
   const user = useEmail();
@@ -37,11 +39,15 @@ const Addproject = () => {
     obj.technology = data.technology
 
     try {
-      const response = await axios.post("http://localhost:4000/add-project", obj, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/add-project`,
+        obj,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log(response);
       navigate("/project");
     } catch (error) {

@@ -5,7 +5,6 @@ import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
   const [valid, setValid] = useState(false);
-
   const [data, setData] = useState({
     email: "",
     password:""
@@ -25,25 +24,27 @@ const Login = () => {
       obj.email = data.email;
       obj.password = data.password;
       try {
-          await axios.post("http://localhost:4000/login", obj, {
-          cors:'no-cors',
-          headers: {
-            'Content-Type':'application/json'
-          }
-          }).then((res) => {
-            console.log(res)
-            if (res.data.message === "User Invalid") {
-              setValid(true);
-            } else {
-              let ob = {
-                email: res.data.email,
-                name: res.data.name,
-              };
-              localStorage.setItem("email", JSON.stringify(ob));
-              //console.log(ob);
-              navigate("/project");
-            }
-          })
+          await axios
+            .post(`${process.env.REACT_APP_URL}/login`, obj, {
+              cors: "no-cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.data.message === "User Invalid") {
+                setValid(true);
+              } else {
+                let ob = {
+                  email: res.data.email,
+                  name: res.data.name,
+                };
+                localStorage.setItem("email", JSON.stringify(ob));
+                //console.log(ob);
+                navigate("/project");
+              }
+            });
       } catch (error) {
         console.log(error)
       }
