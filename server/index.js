@@ -4,9 +4,7 @@ const app = express();
 const cors = require('cors');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-    origin:["http://localhost:3000","https://mern-pm-app.onrender.com"],
-}));
+app.use(cors());
 
 const userRoutes = require("./routes/userRoute");
 const {connect} = require("./db/db");
