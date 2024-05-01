@@ -13,8 +13,10 @@ export const AuthProvider = (props) => {
     const [email, setEmail] = useState({});
     useEffect(() => {
       let user = JSON.parse(localStorage.getItem("email"));
-      obj.email = user.email;
-      setEmail(user.email);
+      if (user) {
+        obj.email = user.email;
+        setEmail(user.email);
+      }
     }, [email]);
     return (<authContext.Provider value={{email,setEmail,obj}}>{props.children }</authContext.Provider>)
 }

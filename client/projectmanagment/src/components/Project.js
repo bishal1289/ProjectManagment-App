@@ -6,35 +6,37 @@ import { useNavigate } from "react-router-dom";
 const Project = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const user = useEmail();
-  if (!user.email) {
-    navigate("/");
-  }
-
+  
   const [data, setData] = useState([]);
 
   useEffect(() => {
     async function getProject() {
       const data = JSON.parse(localStorage.getItem('email'));
-      let obj = {
-        email: data.email,
-      };
-      console.log("ii", obj);
-      try {
-         await axios
-           .post(`${process.env.REACT_APP_URL}/project`, obj, {
-             headers: {
-               "Content-Type": "application/json",
-             },
-           })
-           .then((res) => {
-             console.log(res.data);
-             const data = res.data;
-             setData(data);
-             setLoading(false);
-           });
-      } catch (error) {
-        console.log(error);
+      if (!data) {
+        navigate("/")
+      }
+      else {
+        let obj = {
+          email: data.email,
+        };
+        console.log("ii", obj);
+      
+        try {
+          await axios
+            .post(`${process.env.REACT_APP_URL}/project`, obj, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              const data = res.data;
+              setData(data);
+              setLoading(false);
+            });
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
     getProject();

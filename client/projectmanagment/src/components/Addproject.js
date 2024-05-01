@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEmail } from "../context/AuthContext";
@@ -7,17 +7,24 @@ import { useEmail } from "../context/AuthContext";
 
 const Addproject = () => {
   const navigate = useNavigate();
-  const user = useEmail();
-  if (!user.email) {
-    navigate("/");
-  }
-  const localData = JSON.parse(localStorage.getItem("email"));
+  const [email, setEmail] = useState("");
 
+   useEffect(() => {
+     const localData = JSON.parse(localStorage.getItem("email"));
+     if (!localData ) {
+       navigate("/");
+     } else {
+       setEmail(localData.email);
+     }
+   }, [navigate, setEmail]);
+  
+  console.log("aaaa",email)
+  const localData = JSON.parse(localStorage.getItem("email"));
   const [data, setData] = useState({
     name: "",
     description: "",
     deadline: "",
-    email: localData.email,
+    email:localData.email,
     technology:""
   });
 
